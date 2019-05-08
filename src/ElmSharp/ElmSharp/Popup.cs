@@ -75,6 +75,7 @@ namespace ElmSharp
         SmartEvent _blockClicked;
         SmartEvent _timeout;
         SmartEvent _showFinished;
+        Interop.Evas.SmartCallback _onSelected;
 
         /// <summary>
         /// Creates and initializes a new instance of the Popup class.
@@ -105,6 +106,12 @@ namespace ElmSharp
             _showFinished.On += (sender, e) =>
             {
                 ShowAnimationFinished?.Invoke(this, EventArgs.Empty);
+            };
+
+            _onSelected = (data, obj, info) =>
+            {
+                PopupItem item = ItemObject.GetItemById((int)data) as PopupItem;
+                item?.SendSelected();
             };
         }
 
@@ -279,7 +286,7 @@ namespace ElmSharp
         public PopupItem Append(string label, EvasObject icon)
         {
             PopupItem item = new PopupItem(label, icon, this);
-            item.Handle = Interop.Elementary.elm_popup_item_append(Handle, label, icon, null, (IntPtr)item.Id);
+            item.Handle = Interop.Elementary.elm_popup_item_append(Handle, label, icon, _onSelected, (IntPtr)item.Id);
             AddInternal(item);
             return item;
         }

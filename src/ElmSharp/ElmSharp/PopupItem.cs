@@ -47,5 +47,16 @@ namespace ElmSharp
         /// </summary>
         /// <since_tizen> preview </since_tizen>
         public EvasObject Icon { get; internal set; }
+
+        /// <summary>
+        /// Selected will be triggered when the PopupItem is selected.
+        /// </summary>
+        /// <since_tizen> preview </since_tizen>
+        public event EventHandler Selected;
+
+        internal void SendSelected()
+        {
+            Selected?.Invoke(this, EventArgs.Empty);
+        }
     }
 }

@@ -64,9 +64,24 @@ namespace ElmSharp.Test
                 Console.WriteLine("Popup time out");
             };
 
-            popup.Append("Label1");
-            popup.Append("Label2");
-            popup.Append("Label3");
+            var item1 = popup.Append("Label1");
+            var item2 = popup.Append("Label2");
+            var item3 = popup.Append("Label3");
+
+            item1.Selected += (s, e) =>
+            {
+                Log.Debug("item1 is selected!!!");
+            };
+
+            item2.Selected += (s, e) =>
+            {
+                Log.Debug("item2 is selected!!!");
+            };
+
+            item3.Selected += (s, e) =>
+            {
+                Log.Debug("item3 is selected!!!");
+            };
 
             popup.BackButtonPressed += (s, e) =>
             {
