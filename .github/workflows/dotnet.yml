@@ -34,13 +34,23 @@ jobs:
         repository: shyunMin/TizenFX
         ref: 'tizenfx-docs'
 
-    - name: Build TizenFX sources
+    - name: Clone TizenFX sources
       run: |
-        dotnet --version
-        docfx --version
         ./build.sh clone
+
+    - name: Cache DocFX output
+      id: cache-site
+      uses: actions/cache@v2
+      with:
+        path: _site
+        key: docfx-gh-pages-site-${{ hashFiles('repos/commits') }}
+
+    - name: Build TizenFX sources
+      if: steps.cache-site.outputs.cache-hit != 'true'
+      run: |   
         ./build.sh restore
         ./build.sh build
+        ./build.sh index
 
     - name: Archive Artifacts
       run: |
