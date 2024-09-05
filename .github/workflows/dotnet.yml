@@ -6,7 +6,6 @@ name: .NET Test
 on:
   workflow_dispatch:
 
-
 jobs:
   build:
 
@@ -17,6 +16,10 @@ jobs:
     - name: Setup .NET 6.x
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '6.x'
     - name: Display dotnet version
       run: dotnet --version
+    - name: Install dotnet tools
+      run: dotnet tool install -g docfx --version 2.61.0
+    - name: Disply doxfx version
+      run: docfx --version
