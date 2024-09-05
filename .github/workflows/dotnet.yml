@@ -39,7 +39,7 @@ jobs:
     - name: Archive Artifacts
       run: |
         tar xvfz site.tar.gz _site/
-    - uses: action/upload-artifact@v2
+    - uses: actions/upload-artifact@v2
       with:
         name: documents
         path: site.tar.gz
