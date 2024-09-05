@@ -22,4 +22,5 @@ jobs:
     - name: Install dotnet tools
       run: dotnet tool install -g docfx --version 2.61.0
     - name: Disply doxfx version
-      run: docfx --version
+      run: docfx --version \
+           dotnet --list-sdks
