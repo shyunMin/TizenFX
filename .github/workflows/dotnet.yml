@@ -25,3 +25,21 @@ jobs:
       run: |
         docfx --version
         dotnet --list-sdks
+
+    - name: Git clone TizenFX
+      uses: actions/checkout@v3
+      with:
+        repository: shyunMin/TizenFX
+        ref: 'tizenfx-docs'
+    - name: Build TizenFX sources
+      run: |
+        ./build.sh clone
+        ./build.sh restore
+        ./build.sh build
+    - name: Archive Artifacts
+      run: |
+        tar xvfz site.tar.gz _site/
+    - uses: action/upload-artifact@v2
+      with:
+        name: documents
+        path: site.tar.gz
