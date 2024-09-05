@@ -38,14 +38,14 @@ jobs:
       run: |
         dotnet --version
         docfx --version
-        # ./build.sh clone
-        # ./build.sh restore
-        # ./build.sh build
+        ./build.sh clone
+        ./build.sh restore
+        ./build.sh build
 
-    # - name: Archive Artifacts
-    #   run: |
-    #     tar cfz site.tar.gz _site/
-    # - uses: actions/upload-artifact@v2
-    #   with:
-    #     name: documents
-    #     path: site.tar.gz
+    - name: Archive Artifacts
+      run: |
+        tar cfz site.tar.gz _site/
+    - uses: actions/upload-artifact@v2
+      with:
+        name: documents
+        path: site.tar.gz
