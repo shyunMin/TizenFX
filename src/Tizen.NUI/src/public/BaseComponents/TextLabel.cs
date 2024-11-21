@@ -83,14 +83,17 @@ namespace Tizen.NUI.BaseComponents
         }
 
         static TextLabel() 
-        { 
+        {
+            TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(TextLabel), string.Empty,
+                propertyChanged: SetInternalTextProperty, defaultValueCreator: GetInternalTextProperty);
+
             if (NUIApplication.IsUsingXaml)
             {
                 TranslatableTextProperty = BindableProperty.Create(nameof(TranslatableText), typeof(string), typeof(TextLabel), string.Empty, 
                     propertyChanged: SetInternalTranslatableTextProperty, defaultValueCreator: GetInternalTranslatableTextProperty);
 
-                TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(TextLabel), string.Empty, 
-                    propertyChanged: SetInternalTextProperty, defaultValueCreator: GetInternalTextProperty);
+                //TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(TextLabel), string.Empty, 
+                //    propertyChanged: SetInternalTextProperty, defaultValueCreator: GetInternalTextProperty);
 
                 FontFamilyProperty = BindableProperty.Create(nameof(FontFamily), typeof(string), typeof(TextLabel), string.Empty, 
                     propertyChanged: SetInternalFontFamilyProperty, defaultValueCreator: GetInternalFontFamilyProperty);
@@ -2230,7 +2233,7 @@ namespace Tizen.NUI.BaseComponents
         /// | OptionList | PointSize   | 24 | 28 | 32 | 48 |
         /// |            | MinLineSize | 40 | 48 | 48 | 62 | &lt;&lt; MinLineSize sorted in ascending order
         ///                                    ^    ^
-        ///                                    same values â€‹are not a problem
+        ///                                    same values ?‹are not a problem
         ///
         /// [Binary search not possible]
         /// |            | List index  |  0 |  1 |  2 |  3 |
